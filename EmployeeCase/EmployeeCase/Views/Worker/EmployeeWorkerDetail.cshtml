@@ -1,0 +1,102 @@
+﻿@model EntityLayer.Concrete.EmployeeWorker
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+	label {
+		color: mediumaquamarine;
+	}
+</style>
+<div class="card col-10 mb-md-8" style="margin: initial">
+	<div class="card-header d-xl-flex">
+		<div class="d-flex align-items-center ml-xl-auto">
+			<a class="link-dark d-flex align-items-center ml-3 ml-xl-4" href="/Worker/EmployeeWorkerEdit/@Model.EmployeeWorkerId">
+				<i class="gd-plug icon-text mr-1"></i>
+				<span>Düzenle</span>
+			</a>
+		</div>
+		<div class="d-flex align-items-center ml-xl-auto">
+			<a class="link-dark d-flex align-items-center ml-3 ml-xl-4" href="/Employee/EmployeeTransfer/@Model.EmployeeWorkerId">
+				<i class="gd-shift-left icon-text mr-1"></i>
+				<span>İşten Çıkış İşlemleri</span>
+			</a>
+		</div>
+	</div>
+	<div class="card-header bg-dark d-flex align-items-center" style="margin: inherit;">
+		<h5 class="font-weight-semi-bold">Personel Detayları</h5>
+	</div>
+	<div class="card-body">
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Adı:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeFirstname</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Soyadı:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeLastname</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">T.C. Kimlik Numarası:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeIdentityNumber</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Doğum Tarihi:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeBirthDate.ToShortDateString()</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Doğum Yeri:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeBirthPlace</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Adres 1:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeAdress1</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Adres 2:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeAdress2</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Telefon Numarası:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeTelNo1</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Sabit Numara:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeTelNo2</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">Öğrenim Durumu:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeDegree</p>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label font-weight-bold">İşe Başlama Tarihi:</label>
+			<div class="col-sm-8">
+				<p class="form-control-plaintext">@Model.EmployeeWorkStartDate.ToShortDateString()</p>
+			</div>
+		</div>
+		<br />
+		<div class="form-group row">
+			<a class="btn btn-secondary" href="/Worker/Index">Geri</a>
+		</div>
+	</div>
+</div>

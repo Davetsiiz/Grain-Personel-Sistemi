@@ -1,0 +1,84 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model EmployeeTransferModel
+<div class="card  col-10 mb-md-8" style="margin:initial">
+
+	<div class="card-header bg-dark d-flex align-items-center" style="margin:inherit;">
+		<h5 class="font-weight-semi-bold ">Personel İşten Ayrılma İşlemleri</h5>
+	</div>
+	<div class="card-body">
+		<form class="form-group  " method="post" enctype="multipart/form-data">
+			@using (Html.BeginForm("EmployeeTransfer", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+			{
+				@Html.AntiForgeryToken()
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeFirstname, "Personel Adı", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeFirstname, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeLastname, "Personel Soyadı", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeLastname, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				@*<div class="form-group">
+			<label style="font-size:20px;" class="ct-labels">Fotoğraf Yükleyiniz</label><br />
+			<input onchange="loadFile(event)" accept="/Image/*" style="font-size:20px;" type="file" name="Photo" id="exampleFormControlFile1">
+			<p><img id="image" style="display:none;" class="avatar-xl rounded-circle" /></p>
+
+			</div>*@
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeIdentityNumber, "T.C. Kimilk Numarası", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeIdentityNumber, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeBirthDate, "Doğum Tarihi", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeBirthDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeBirthPlace, "Doğum Yeri", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeBirthPlace, new { @class = "form-control" , @readonly = "readonly"})
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeAdress1, "Adres 1", new { @style = "font-size:20px;" })
+					@Html.TextAreaFor(model => model.EmployeeAdress1, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeAdress2, "Adres 2", new { @style = "font-size:20px;" })
+					@Html.TextAreaFor(model => model.EmployeeAdress2, new { @class = "form-control", @readonly = "readonly"})
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeTelNo1, "Telefon Numarası", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeTelNo1, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeTelNo2, "Sabit Numara", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeTelNo2, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeDegree, "Öğrenim Durumu", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeDegree, new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeWorkStartDate, "İşe Başlama Tarihi", new { @style = "font-size:20px;" })
+					@Html.TextBoxFor(model => model.EmployeeWorkStartDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @readonly = "readonly" })
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.EmployeeWorkQuittDate, "İşten Ayırlma Tarihi", new { @style = "font-size:20px; color:red;" })
+					@Html.TextBoxFor(model => model.EmployeeWorkQuittDate, "{0:dd.MM.yyyy}", new { @class = "form-control", style = "background-color: red;"})
+				</div>
+				<br />
+				<div class="form-group">
+					<form asp-controller="Employee" asp-action="EmployeeTransfer" method="post">
+						<input type="hidden" name="employeeId" value="@Model.EmployeeTransferId" />
+						<button class="btn btn-danger" type="submit">İşten Ayrıl</button>
+					</form>
+				</div>
+			}
+		</form>
+	</div>
+</div>
+
+
+

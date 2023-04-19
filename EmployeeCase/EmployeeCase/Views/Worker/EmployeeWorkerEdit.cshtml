@@ -1,0 +1,87 @@
+﻿@model EntityLayer.Concrete.EmployeeWorker
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card  col-10 mb-md-8" style="margin:initial">
+    
+    <div class="card-header bg-dark d-flex align-items-center" style="margin:inherit;">
+        <h5 class="font-weight-semi-bold ">Personel Düzenleme</h5>
+    </div>
+    <div class="card-body">
+        <form class="form-group  " method="post" enctype="multipart/form-data">
+            @using (Html.BeginForm("EmployeeWorkerEdit", "Worker", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeFirstname, "Personel Adı", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeFirstname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeFirstname, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeLastname, "Personel Soyadı", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeLastname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeLastname, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeIdentityNumber, "T.C. Kimilk Numarası", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeIdentityNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeIdentityNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeBirthDate, "Doğum Tarihi", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeBirthDate, "{0:dd.MM.yyyy}", new { @class = "form-control",maxlength=10, })
+                    @Html.ValidationMessageFor(model => model.EmployeeBirthDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeBirthPlace, "Doğum Yeri", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeBirthPlace, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeBirthPlace, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeAdress1, "Adres 1", new { @style = "font-size:20px;" })
+                    @Html.TextAreaFor(model => model.EmployeeAdress1, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeAdress1, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeAdress2, "Adres 2", new { @style = "font-size:20px;" })
+                    @Html.TextAreaFor(model => model.EmployeeAdress2, new { @class = "form-control",@type="number",})
+                    @Html.ValidationMessageFor(model => model.EmployeeAdress2, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeTelNo1, "Telefon Numarası", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeTelNo1, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeTelNo1, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeTelNo2, "Sabit Numara", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeTelNo2, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeTelNo2, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeDegree, "Öğrenim Durumu", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeDegree, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeDegree, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.EmployeeWorkStartDate, "İşbaşı Tarihi", new { @style = "font-size:20px;" })
+                    @Html.TextBoxFor(model => model.EmployeeWorkStartDate, "{0:dd.MM.yyyy}", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmployeeWorkStartDate, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <div class="form-group">
+                <button class="btn btn-info" type="submit">Kaydet</button>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+@*<script>
+    var loadFile = function (event) {
+        var photo = document.getElementById("image");
+        photo.src = URL.createObjectURL(event.target.files[0]);
+        $("#image").show(100);
+    };
+</script>*@

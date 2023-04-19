@@ -1,0 +1,136 @@
+﻿@using EntityLayer.Concrete
+@model List<EmployeeWorker>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+	<script src="~/wwwroot/lib/jquery/dist/jquery.min.js"></script>
+	<script>
+		setInterval(function () {
+			$("#filter").change(function () {
+				var filterValue = $(this).val();
+				if (filterValue == "All") {
+					$("#datatable tr").show();
+				} else {
+					$("#datatable tr").hide();
+					$("#datatable tr[data-filter='" + filterValue + "']").show();
+				}
+			});
+			$("#filterDepartment").change(function () {
+				var filterValue = $(this).val();
+				if (filterValue == "All") {
+					$("#datatable tr").show();
+				} else {
+					$("#datatable tr").hide();
+					$("#datatable tr[data-department-filter='" + filterValue + "']").show();
+				}
+			});
+		}, 1000);
+	</script>
+</head>
+
+<div class="card col-md-12" style="text-align:center">
+	<div class="card-header d-xl-flex">
+		<div class="d-flex align-items-center ml-xl-auto">
+			<div class="link-dark d-flex align-items-center ml-6 ml-xl-8">
+				@{
+					DataAccessLayer.Concrete.Context dto = new DataAccessLayer.Concrete.Context();
+					var pos = dto.positions;
+					var dep = dto.departments;
+				}
+				<label for="filter">Filtrele:</label>
+				<select class="link-dark d-flex align-items-center ml-6 ml-xl-8" id="filter">
+					<option value="All">Pozisyon</option>
+					@foreach (var item in pos)
+					{
+						<option value="@item.PositionName">@item.PositionName</option>
+					}
+				</select>
+				<select class="link-dark d-flex align-items-center ml-6 ml-xl-8" id="filterDepartment">
+					<option value="All">Bölüm</option>
+					@foreach (var item in dep)
+					{
+						<option value="@item.DepartmentName">@item.DepartmentName</option>
+					}
+				</select>
+			</div>
+			<a class="link-dark d-flex align-items-center ml-6 ml-xl-8" href="/Employee/EmployeeAdd">
+				<i class="gd-plug icon-text mr-1"></i>
+				<span>Yeni Personel Ekle</span>
+			</a>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="card-header bg-dark d-flex align-items-center" style="margin:inherit;">
+			<h5 class="font-weight-semi-bold">Personel Listesi</h5>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr class="col-10">
+					<th>#</th>
+					<th>İsim & Soyisim</th>
+					<th>T.C. No</th>
+					<th>Telefon Numarısı</th>
+					<th>Pozisyon</th>
+					<th>Bölüm</th>
+					<th>Şube</th>
+					<th>Detay</th>
+					<th>Hiyerarşi Düzenle</th>
+				</tr>
+			</thead>
+			<tbody id="datatable">
+				@{
+					int sayac = 0;
+
+				}
+				@foreach (var item in Model)
+				{
+					var posid = dto.positions.FirstOrDefault(s => s.PositionId == item.Employee.PositionId);
+					var depid = dto.departments.FirstOrDefault(s => s.DepertmentId == item.Employee.DepartmentId);
+					var bra = dto.branches.FirstOrDefault(s => s.BranchId == item.Employee.BranchId);
+					sayac++;
+					<tr data-filter="@posid.PositionName" data-department-filter="@depid.DepartmentName">
+						<td>@sayac</td>
+						<td>@item.EmployeeFirstname @item.EmployeeLastname </td>
+						<td>@item.EmployeeIdentityNumber</td>
+						<td>@item.EmployeeTelNo1</td>
+						<td>
+							@{
+
+								<span>@posid.PositionName</span>
+							}
+						</td>
+						<td>
+							@{
+
+								<span>@depid.DepartmentName</span>
+							}
+						</td>
+						<td>
+							@{
+
+								<span>@bra.BranchName</span>
+							}
+						</td>
+						<td>
+							<a class="btn" href="/Worker/EmployeeWorkerDetail/@item.EmployeeWorkerId">
+								<i class="gd-zoom-in icon-text"></i>
+								<span><u>Detay</u></span>
+							</a>
+						</td>
+						<td>
+							<a class="btn" href="/Employee/EmployeeEdit/@item.EmployeeWorkerId">
+								<i class="gd-zoom-in icon-text"></i>
+								<span><u>Hiyerarşi Düzenle</u></span>
+							</a>
+						</td>
+						<td>
+							<a href="/Employee/EmployeeDelete/@item.EmployeeWorkerId" class="btn btn-danger" onclick="return confirm('Bu bloğu silmek istediğinize emin misiniz?');">Sil</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
